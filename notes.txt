@@ -1,0 +1,58 @@
+Print person hanging puts " o\n-|-\n_|_” or puts " 0----|\n-|-   |\n_|_   |\n      |"
+sleep 0.5
+
+Wrong guesses:
+1. Pole
+2. Sideways pole
+3. Head
+4. Body
+5. Arms
+6. Leg body
+7. Legs, end
+
+
+Create Game Class!!!!!!
+
+Step 4: Before PlayGame
+- [ ] Print choice message
+- [ ] If user selects new game
+    - [ ] Play as normal
+- [ ] Else
+    - [ ] Show available game(s) as list
+    - [ ] PlayGame from stopped point
+
+Step 1:
+- [ ] PlayGame function
+- [ ] Start new game
+    - [ ] Load dictionary file
+    - [ ] Randomly select word with length between 5 and 12 characters
+    - [ ] Set available_guesses = WHOLE_ALPHABET
+    - [ ] Set guessed_letters to “_ _“ word.length
+    - [ ] Set number of guesses = 7
+- [ ] PlayRounds until
+    - [ ] 1. User guesses word
+    - [ ] 2. User runs out of guesses
+
+
+Step 3: User choice
+- [ ] Create bool
+- [ ] Prompt user for choice to save game or continue
+- [ ] If save game
+    - [ ] Write all pertinent data to external yaml or Json file
+- [ ] Else, play as normal
+
+Step 2:
+- [ ] PlayRound function
+- [ ] Set guessing_word equal to PlayGame random word
+- [ ] Set available_guesses = available_guesses
+- [ ] 
+- [ ] Get user letter guess
+- [ ] Downcast guess
+    - [ ] 1. If letter in guessing_word
+        - [ ] Remove letter from available_guesses
+        - [ ] Add letter AT INDEX to guessed_letters
+        - [ ] Print congratulatory message
+    - [ ] 2. Else
+        - [ ] Remove letter from available_guesses
+        - [ ] Print sad message
+        - [ ] Reduce number of guesses by 1
