@@ -1,7 +1,8 @@
 --- !ruby/object:Game
-name: TJ
+name: tj
 new_game: false
 alphabet:
+- b
 - c
 - d
 - e
@@ -23,21 +24,22 @@ alphabet:
 - u
 - v
 - w
-- x
 - "y"
 - z
-num_guesses: 2
+num_guesses: 1
 loaded: true
 id: 0
 random_word_array:
-- c
-- l
-- i
-- f
-- f
+- g
+- r
+- a
+- "n"
+- d
 guessed_letters:
 - _
 - _
+- a
 - _
 - _
-- _
+guess_right: false
+winner: false
