@@ -17,6 +17,127 @@ def user_guess(alphabets)
 
 end
 
+def display_message(number)
+  case number
+  when 0 
+    4.times do 
+      puts "      |"
+      sleep 0.5
+    end
+  when 1
+    5.times do 
+      print "-"
+      sleep 0.5
+    end
+    puts "|"
+    sleep 0.5
+    3.times do
+      puts "     |"
+      sleep 0.5
+    end
+  when 2
+    print " 0"
+    sleep 0.5
+    5.times do 
+      print "-"
+      sleep 0.5
+    end
+    puts "|"
+    sleep 0.5
+    3.times do
+      puts "       |"
+      sleep 0.5
+    end
+  when 3
+    print " 0"
+    sleep 0.5
+    5.times do 
+      print "-"
+      sleep 0.5
+    end
+    puts "|"
+    sleep 0.5
+    puts " |     |"
+    sleep 0.5
+    2.times do
+      puts "       |"
+      sleep 0.5
+    end
+  
+  when 4
+    print " 0"
+    sleep 0.5
+    5.times do 
+      print "-"
+      sleep 0.5
+    end
+    puts "|"
+    sleep 0.5
+    print "-"
+    sleep 0.5
+    print "|"
+    sleep 0.5
+    print "-"
+    sleep 0.5
+    puts "    |"
+    sleep 0.5
+    puts "       |"
+    sleep 0.5
+    puts "       |"
+
+  when 5
+    print " 0"
+    sleep 0.5
+    5.times do 
+      print "-"
+      sleep 0.5
+    end
+    puts "|"
+    sleep 0.5
+    print "-"
+    sleep 0.5
+    print "|"
+    sleep 0.5
+    print "-"
+    sleep 0.5
+    puts "    |"
+    sleep 0.5
+    print " +"
+    sleep 0.5
+    puts "     |"
+    sleep 0.5
+    puts "       |"
+
+  when 6
+    print " 0"
+    sleep 0.5
+    5.times do 
+      print "-"
+      sleep 0.5
+    end
+    puts "|"
+    sleep 0.5
+    print "-"
+    sleep 0.5
+    print "|"
+    sleep 0.5
+    print "-"
+    sleep 0.5
+    puts "    |"
+    sleep 0.5
+    print "_"
+    sleep 0.5
+    print "+"
+    sleep 0.5
+    print "_"
+    sleep 0.5
+    puts "    |"
+    sleep 0.5
+    puts "       |"
+  end
+  
+end
+
 
 def play_game
 
@@ -33,6 +154,7 @@ def play_game
   guessed_letters = display_letters(random_word_array).split
   until num_guesses == 7 || game_won == true
     guess_right = false
+    puts "Available Letters: #{alphabets}"
     letter_guess = user_guess(alphabets)
     if random_word_array.include?(letter_guess)
       guess_right = true
@@ -47,11 +169,9 @@ def play_game
         game_won = true
       end
     else
-      4.times do 
-        puts "      |"
-        sleep 0.5
-      end
+      display_message(num_guesses)
       num_guesses += 1
+      puts random_word_array.join("") if num_guesses == 7
     end
     p guessed_letters
   end
