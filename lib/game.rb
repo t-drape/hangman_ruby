@@ -46,7 +46,7 @@ class Game
   end
 
   def read_file
-    lines = File.readlines('google-10000-english.txt')
+    lines = File.readlines('google-10000-english-no-swears.txt')
     lines.map(&:chomp)
   end
 
