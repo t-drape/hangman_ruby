@@ -1,0 +1,43 @@
+--- !ruby/object:Game
+name: TJ
+new_game: false
+alphabet:
+- c
+- d
+- e
+- f
+- g
+- h
+- i
+- j
+- k
+- l
+- m
+- "n"
+- o
+- p
+- q
+- r
+- s
+- t
+- u
+- v
+- w
+- x
+- "y"
+- z
+num_guesses: 2
+loaded: true
+id: 0
+random_word_array:
+- c
+- l
+- i
+- f
+- f
+guessed_letters:
+- _
+- _
+- _
+- _
+- _
