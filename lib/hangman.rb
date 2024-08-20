@@ -16,6 +16,8 @@ class Game
     @id = 0
     @random_word_array = random_word.split('')
     @guessed_letters = display_letters.split
+    @guess_right = false
+    @winner = false
   end
 
   def show_guesses
@@ -61,49 +63,73 @@ class Game
     write_file
   end
 
+  def continue_playing
+    choices = %w[y n]
+    puts "\nKeep Playing? [Y, N]"
+    answer = gets.chomp.downcase
+    answer = gets.chomp unless choices.include?(answer)
+    answer == choices[0]
+  end
+
+  def update_data(counter, letter_guess)
+    @random_word_array.each_with_index do |letter, index|
+      @guessed_letters[index] = letter if letter == letter_guess
+      counter += 1 if letter == letter_guess
+    end
+    @guess_right = true
+    counter
+  end
+
+  def play_round(counter)
+    @guess_right = false
+    puts "Available Letters: #{@alphabet}"
+    letter_guess = user_guess
+    counter = update_data(counter, letter_guess) if @random_word_array.include?(letter_guess)
+    @alphabet = @alphabet.reject { |l| l == letter_guess }
+    counter
+  end
+
+  def game_finished(counter)
+    if @guess_right == true
+      if counter == @random_word_array.length
+        @winner = true
+        true
+      end
+    else
+      display_message(@num_guesses)
+      @num_guesses += 1
+      @num_guesses == 7
+    end
+  end
+
+  def end_game
+    if @winner
+      puts "Congratulations! #{@name}, You Won!"
+    else
+      puts 'Sorry, You lost!'
+      puts "The word was '#{@random_word_array.join('')}'"
+      p @guessed_letters
+    end
+    true
+  end
+
+  def ask_to_continue
+    p @guessed_letters
+    choice = continue_playing
+    return if choice
+
+    puts 'Game Stopped!'
+    dump_data
+    choice
+  end
+
   def play_game
-    game_won = false
     game_over = false
     counter = 0
-    until @num_guesses == 7 || game_won == true
-      guess_right = false
-      puts "Available Letters: #{@alphabet}"
-      letter_guess = user_guess
-      if @random_word_array.include?(letter_guess)
-        guess_right = true
-        @random_word_array.each_with_index do |letter, index|
-          @guessed_letters[index] = letter if letter == letter_guess
-          counter += 1 if letter == letter_guess
-        end
-      end
-      @alphabet = @alphabet.reject { |l| l == letter_guess }
-      if guess_right == true
-        if counter == @random_word_array.length
-          game_won = true
-          return
-        end
-      else
-        display_message(@num_guesses)
-        @num_guesses += 1
-        if @num_guesses == 7
-          puts @random_word_array.join('')
-          game_over = true
-          return
-        end
-      end
-      p @guessed_letters
-      next unless game_over == false
-
-      choices = %w[y n]
-      puts "\nKeep Playing? [Y, N]"
-      answer = gets.chomp.downcase
-      answer = gets.chomp unless choices.include?(answer)
-      if answer == choices[1] # rubocop:disable Style/Next
-
-        puts 'Game Stopped!'
-        dump_data
-        return
-      end
+    until game_over
+      counter = play_round(counter)
+      game_over = game_finished(counter)
+      game_over = game_over ? end_game : ask_to_continue
     end
   end
 end
